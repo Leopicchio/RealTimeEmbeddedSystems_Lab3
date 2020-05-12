@@ -1,6 +1,7 @@
 
 module main_system (
 	clk_clk,
+	custom_counter_0_interrupt_sender_irq,
 	parallel_port_leds_export,
 	pll_clk_sdram_clk,
 	reset_reset_n,
@@ -15,6 +16,7 @@ module main_system (
 	sdram_controller_wire_we_n);	
 
 	input		clk_clk;
+	output		custom_counter_0_interrupt_sender_irq;
 	output	[9:0]	parallel_port_leds_export;
 	output		pll_clk_sdram_clk;
 	input		reset_reset_n;

@@ -4,6 +4,9 @@
 #include "altera_avalon_timer_regs.h"
 #include "altera_avalon_mutex_regs.h"
 #include <altera_avalon_mutex.h>
+#include "altera_avalon_mailbox_simple.h"
+#include "altera_avalon_mailbox_simple_regs.h"
+#include "system.h"
 #include "sys/alt_irq.h"
 
 
@@ -25,12 +28,91 @@ OS_STK    task_leds_stack[TASK_STACKSIZE];
 #define CLOCK_FREQUENCY		50000000.0 				// Hertz
 #define CLOCK_PERIOD		0.00002					// milliseconds
 
+
+
+#define IRESETVAL  0
+//Change the values if your register map is different than here
+#define ICOUNTER   0
+#define IRZ        1
+#define ISTART     2
+#define ISTOP      3
+#define IIRQEN     4
+#define ICLREOT    5
+#define RESETVAL   0XFF000000
+//Counter starts counting from this value
+#define IRQENVAL   1
+#define IRQDISVAL  0
+#define CLREOTVAL  1
+#define ARBITVAL   0X0000FFFF
+//Arbitrary writedata value used for addresses 1,2,3
+#define SPECIFIC_COUNTER_0_BASE CUSTOM_COUNTER_0_BASE
+
+
+
 unsigned long milliseconds = 0;
 char time_elapsed = 0;	// a flag raised every time COUNTER_PERIOD has elapsed
 alt_mutex_dev* mutex;
 
+alt_u32 message[2] = {0x00001111, 0xaa55aa55};
+alt_u32 message_R[2];
+int timeout     = 50000;
+alt_u32 status;
+altera_avalon_mailbox_dev* mailbox;
+
+
 long read_timer(long base_address);
 void timer_interrupt();
+
+/* example callback function from users*/
+void tx_cb (void* report, int status) {
+	if (!status) {
+	   printf("Transfer done");
+	} else {
+	   printf("error in transfer");
+	}
+}
+
+void send_to_mailbox(){
+	/* get the mailbox device handle */
+		mailbox = altera_avalon_mailbox_open("/dev/mailbox_simple_0", tx_cb, NULL);
+
+		timeout = 0;
+		status = altera_avalon_mailbox_send(mailbox, message, timeout, POLL);
+
+		if (status) {
+			printf("error in transfer");
+		} else {
+			printf("Transfer done");
+		}
+		altera_avalon_mailbox_close(mailbox);
+}
+
+
+void test_counter()
+	{  IOWR(SPECIFIC_COUNTER_0_BASE, IRESETVAL, RESETVAL);
+	//Reset value is loaded
+	IOWR(SPECIFIC_COUNTER_0_BASE, IRZ, ARBITVAL);
+	//Reset activated to load the counter with the reset value
+	printf("iCounter after reset= %x\n",IORD(SPECIFIC_COUNTER_0_BASE, ICOUNTER));
+	//Check that counter is loaded with the reset value
+	IOWR(SPECIFIC_COUNTER_0_BASE, ISTART, ARBITVAL);
+	//Start the counter
+	printf("iCounter after start= %x\n",IORD(SPECIFIC_COUNTER_0_BASE, ICOUNTER));
+	//Read a value from the running counter
+	IOWR(SPECIFIC_COUNTER_0_BASE, ISTOP, ARBITVAL);
+	printf("iCounter after stop1= %x\n",IORD(SPECIFIC_COUNTER_0_BASE, ICOUNTER));
+	printf("iCounter after stop2= %x\n",IORD(SPECIFIC_COUNTER_0_BASE, ICOUNTER));
+	//Two consecutive reads to test that the counter is stopped. They should give    the same result
+	IOWR(SPECIFIC_COUNTER_0_BASE, ISTART, ARBITVAL);
+	//Restart the counter
+	printf("iCounter after restart1= %x\n",IORD(SPECIFIC_COUNTER_0_BASE,ICOUNTER));
+	printf("iCounter after restart2= %x\n",IORD(SPECIFIC_COUNTER_0_BASE,ICOUNTER));
+	//Two consecutive reads to test that the counter is stopped. They should give different results
+	IOWR(SPECIFIC_COUNTER_0_BASE, ISTOP, ARBITVAL);
+}
+
+
+
 
 void task_leds(void* pdata)
 {
@@ -52,6 +134,7 @@ void task_leds(void* pdata)
 			timer_end = read_timer(CPU_0_0_TIMER_0_BASE);
 
 			printf("Timer reading overhead: %f us\n", (timer_start - timer_end)/TICK_PER_MICROSEC);
+			//send_to_mailbox();
 		}
 	}
 }
@@ -71,7 +154,10 @@ int main(void)
 	/* get the mutex device handle */
 	mutex = altera_avalon_mutex_open("/dev/mutex_0");
 
+	test_counter();
+	//while(1){}
 
+	//send_to_mailbox();
 
 	// creates the task which displays the counter value on the LEDs
 	OSTaskCreateExt(task_leds,

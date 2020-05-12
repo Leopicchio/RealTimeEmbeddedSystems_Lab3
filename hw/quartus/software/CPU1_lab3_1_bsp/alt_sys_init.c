@@ -4,7 +4,7 @@
  * Machine generated for CPU 'CPU_1_0_nios2_gen2_0' in SOPC Builder design 'main_system'
  * SOPC Builder design path: ../../main_system.sopcinfo
  *
- * Generated: Sun May 10 18:11:16 CEST 2020
+ * Generated: Mon May 11 15:19:44 CEST 2020
  */
 
 /*
@@ -60,6 +60,7 @@
 
 #include "altera_nios2_gen2_irq.h"
 #include "altera_avalon_jtag_uart.h"
+#include "altera_avalon_mailbox_simple.h"
 #include "altera_avalon_mutex.h"
 #include "altera_avalon_sysid_qsys.h"
 #include "altera_avalon_timer.h"
@@ -70,6 +71,7 @@
 
 ALTERA_NIOS2_GEN2_IRQ_INSTANCE ( CPU_1_0_NIOS2_GEN2_0, CPU_1_0_nios2_gen2_0);
 ALTERA_AVALON_JTAG_UART_INSTANCE ( CPU_1_0_JTAG_UART_0, CPU_1_0_jtag_uart_0);
+ALTERA_AVALON_MAILBOX_SIMPLE_INSTANCE ( MAILBOX_SIMPLE_0, mailbox_simple_0);
 ALTERA_AVALON_MUTEX_INSTANCE ( MUTEX_0, mutex_0);
 ALTERA_AVALON_SYSID_QSYS_INSTANCE ( SYSID_QSYS_0, sysid_qsys_0);
 ALTERA_AVALON_TIMER_INSTANCE ( CPU_1_0_TIMER_0, CPU_1_0_timer_0);
@@ -97,6 +99,7 @@ void alt_sys_init( void )
 {
     ALTERA_AVALON_TIMER_INIT ( CPU_1_0_TIMER_0, CPU_1_0_timer_0);
     ALTERA_AVALON_JTAG_UART_INIT ( CPU_1_0_JTAG_UART_0, CPU_1_0_jtag_uart_0);
+    ALTERA_AVALON_MAILBOX_SIMPLE_INIT ( MAILBOX_SIMPLE_0, mailbox_simple_0);
     ALTERA_AVALON_MUTEX_INIT ( MUTEX_0, mutex_0);
     ALTERA_AVALON_SYSID_QSYS_INIT ( SYSID_QSYS_0, sysid_qsys_0);
 }

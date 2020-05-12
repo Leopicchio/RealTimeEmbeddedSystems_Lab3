@@ -1,4 +1,4 @@
-/* Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition */
+/* Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition */
 JedecChain;
 	FileRevision(JESD32A);
 	DefaultMfr(6E);
@@ -6,7 +6,7 @@ JedecChain;
 	P ActionCode(Ign)
 		Device PartName(SOCVHPS) MfrSpec(OpMask(0));
 	P ActionCode(Cfg)
-		Device PartName(5CSEMA5F31) Path("C:/Users/leo/Desktop/Real_Time_Embedded_Systems/Lab3_1/hw/quartus/output_files/") File("Lab3_0_time_limited.sof") MfrSpec(OpMask(1));
+		Device PartName(5CSEMA5F31) Path("/home/vm/RealTimeEmbeddedSystems_Lab3/hw/quartus/output_files/") File("Lab3_0.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 

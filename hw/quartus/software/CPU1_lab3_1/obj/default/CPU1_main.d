@@ -21,6 +21,9 @@ obj/default/CPU1_main.o: CPU1_main.c \
  ../CPU1_lab3_1_bsp//HAL/inc/sys/alt_errno.h \
  ../CPU1_lab3_1_bsp//UCOSII/inc/os/alt_sem.h \
  ../CPU1_lab3_1_bsp//UCOSII/inc/priv/alt_sem_ucosii.h \
+ ../CPU1_lab3_1_bsp//drivers/inc/altera_avalon_mailbox_simple.h \
+ ../CPU1_lab3_1_bsp//HAL/inc/priv/alt_file.h \
+ ../CPU1_lab3_1_bsp//drivers/inc/altera_avalon_mailbox_simple_regs.h \
  ../CPU1_lab3_1_bsp//HAL/inc/sys/alt_irq.h
 
 ../CPU1_lab3_1_bsp//HAL/inc/includes.h:
@@ -72,5 +75,11 @@ obj/default/CPU1_main.o: CPU1_main.c \
 ../CPU1_lab3_1_bsp//UCOSII/inc/os/alt_sem.h:
 
 ../CPU1_lab3_1_bsp//UCOSII/inc/priv/alt_sem_ucosii.h:
+
+../CPU1_lab3_1_bsp//drivers/inc/altera_avalon_mailbox_simple.h:
+
+../CPU1_lab3_1_bsp//HAL/inc/priv/alt_file.h:
+
+../CPU1_lab3_1_bsp//drivers/inc/altera_avalon_mailbox_simple_regs.h:
 
 ../CPU1_lab3_1_bsp//HAL/inc/sys/alt_irq.h:

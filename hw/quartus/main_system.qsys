@@ -33,6 +33,70 @@
          type = "int";
       }
    }
+   element custom_counter_0
+   {
+      datum _sortIndex
+      {
+         value = "9";
+         type = "int";
+      }
+   }
+   element custom_counter_0.avalon_slave_0
+   {
+      datum baseAddress
+      {
+         value = "67108864";
+         type = "String";
+      }
+   }
+   element custom_counter_0.avalon_slave_1
+   {
+      datum baseAddress
+      {
+         value = "67108864";
+         type = "String";
+      }
+   }
+   element mailbox_simple_0
+   {
+      datum _sortIndex
+      {
+         value = "8";
+         type = "int";
+      }
+   }
+   element mailbox_simple_0.avmm_msg_receiver
+   {
+      datum baseAddress
+      {
+         value = "67108912";
+         type = "String";
+      }
+   }
+   element mailbox_simple_0.avmm_msg_sender
+   {
+      datum baseAddress
+      {
+         value = "67108912";
+         type = "String";
+      }
+   }
+   element main_system
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone V";
+         type = "String";
+      }
+   }
+   element main_system
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone V";
+         type = "String";
+      }
+   }
    element main_system
    {
       datum _originalDeviceFamily
@@ -53,7 +117,7 @@
    {
       datum baseAddress
       {
-         value = "67108880";
+         value = "67108928";
          type = "String";
       }
    }
@@ -69,7 +133,7 @@
    {
       datum baseAddress
       {
-         value = "67108864";
+         value = "67108896";
          type = "String";
       }
    }
@@ -109,7 +173,7 @@
    {
       datum baseAddress
       {
-         value = "67108888";
+         value = "67108936";
          type = "String";
       }
    }
@@ -136,6 +200,11 @@
  <instanceScript></instanceScript>
  <interface name="clk" internal="clk_0.clk_in" type="clock" dir="end" />
  <interface
+   name="custom_counter_0_interrupt_sender"
+   internal="custom_counter_0.interrupt_sender"
+   type="interrupt"
+   dir="end" />
+ <interface
    name="parallel_port_leds"
    internal="pio_0.external_connection"
    type="conduit"
@@ -155,7 +224,7 @@
   <parameter name="AUTO_CLK_CLOCK_DOMAIN" value="4" />
   <parameter name="AUTO_CLK_CLOCK_RATE" value="50000000" />
   <parameter name="AUTO_CLK_RESET_DOMAIN" value="4" />
-  <parameter name="AUTO_CPU_0_OUTGOING_ADDRESS_MAP"><![CDATA[<address-map><slave name='sdram_controller.s1' start='0x0' end='0x4000000' /><slave name='pio_0.s1' start='0x4000000' end='0x4000010' /><slave name='mutex_0.s1' start='0x4000010' end='0x4000018' /><slave name='sysid_qsys_0.control_slave' start='0x4000018' end='0x4000020' /></address-map>]]></parameter>
+  <parameter name="AUTO_CPU_0_OUTGOING_ADDRESS_MAP"><![CDATA[<address-map><slave name='sdram_controller.s1' start='0x0' end='0x4000000' /><slave name='custom_counter_0.avalon_slave_0' start='0x4000000' end='0x4000020' /><slave name='pio_0.s1' start='0x4000020' end='0x4000030' /><slave name='mailbox_simple_0.avmm_msg_sender' start='0x4000030' end='0x4000040' /><slave name='mutex_0.s1' start='0x4000040' end='0x4000048' /><slave name='sysid_qsys_0.control_slave' start='0x4000048' end='0x4000050' /></address-map>]]></parameter>
   <parameter name="AUTO_CPU_0_OUTGOING_ADDRESS_WIDTH" value="AddressWidth = 27" />
   <parameter name="AUTO_DEVICE" value="5CSEMA5F31C6" />
   <parameter name="AUTO_DEVICE_FAMILY" value="Cyclone V" />
@@ -167,7 +236,7 @@
   <parameter name="AUTO_CLK_CLOCK_DOMAIN" value="4" />
   <parameter name="AUTO_CLK_CLOCK_RATE" value="50000000" />
   <parameter name="AUTO_CLK_RESET_DOMAIN" value="4" />
-  <parameter name="AUTO_CPU_1_OUTGOING_ADDRESS_MAP"><![CDATA[<address-map><slave name='sdram_controller.s1' start='0x0' end='0x4000000' /><slave name='pio_0.s1' start='0x4000000' end='0x4000010' /><slave name='mutex_0.s1' start='0x4000010' end='0x4000018' /><slave name='sysid_qsys_0.control_slave' start='0x4000018' end='0x4000020' /></address-map>]]></parameter>
+  <parameter name="AUTO_CPU_1_OUTGOING_ADDRESS_MAP"><![CDATA[<address-map><slave name='sdram_controller.s1' start='0x0' end='0x4000000' /><slave name='custom_counter_0.avalon_slave_1' start='0x4000000' end='0x4000020' /><slave name='pio_0.s1' start='0x4000020' end='0x4000030' /><slave name='mailbox_simple_0.avmm_msg_receiver' start='0x4000030' end='0x4000040' /><slave name='mutex_0.s1' start='0x4000040' end='0x4000048' /><slave name='sysid_qsys_0.control_slave' start='0x4000048' end='0x4000050' /></address-map>]]></parameter>
   <parameter name="AUTO_CPU_1_OUTGOING_ADDRESS_WIDTH" value="AddressWidth = 27" />
   <parameter name="AUTO_DEVICE" value="5CSEMA5F31C6" />
   <parameter name="AUTO_DEVICE_FAMILY" value="Cyclone V" />
@@ -175,17 +244,32 @@
   <parameter name="AUTO_GENERATION_ID" value="0" />
   <parameter name="AUTO_UNIQUE_ID">$${FILENAME}_CPU_1_0</parameter>
  </module>
- <module name="clk_0" kind="clock_source" version="18.0" enabled="1">
+ <module name="clk_0" kind="clock_source" version="18.1" enabled="1">
   <parameter name="clockFrequency" value="50000000" />
   <parameter name="clockFrequencyKnown" value="true" />
   <parameter name="inputClockFrequency" value="0" />
   <parameter name="resetSynchronousEdges" value="NONE" />
  </module>
- <module name="mutex_0" kind="altera_avalon_mutex" version="18.0" enabled="1">
+ <module
+   name="custom_counter_0"
+   kind="custom_counter"
+   version="1.0"
+   enabled="1" />
+ <module
+   name="mailbox_simple_0"
+   kind="altera_avalon_mailbox_simple"
+   version="18.1"
+   enabled="1">
+  <parameter name="AWIDTH" value="2" />
+  <parameter name="DWIDTH" value="32" />
+  <parameter name="MSG_ARRIVAL_NOTIFY" value="1" />
+  <parameter name="MSG_SPACE_NOTIFY" value="0" />
+ </module>
+ <module name="mutex_0" kind="altera_avalon_mutex" version="18.1" enabled="1">
   <parameter name="initialOwner" value="0" />
   <parameter name="initialValue" value="0" />
  </module>
- <module name="pio_0" kind="altera_avalon_pio" version="18.0" enabled="1">
+ <module name="pio_0" kind="altera_avalon_pio" version="18.1" enabled="1">
   <parameter name="bitClearingEdgeCapReg" value="false" />
   <parameter name="bitModifyingOutReg" value="false" />
   <parameter name="captureEdge" value="false" />
@@ -199,7 +283,7 @@
   <parameter name="simDrivenValue" value="0" />
   <parameter name="width" value="10" />
  </module>
- <module name="pll_0" kind="altera_pll" version="18.0" enabled="1">
+ <module name="pll_0" kind="altera_pll" version="18.1" enabled="1">
   <parameter name="debug_print_output" value="false" />
   <parameter name="debug_use_rbc_taf_method" value="false" />
   <parameter name="device" value="5CSEMA5F31C6" />
@@ -262,7 +346,7 @@
   <parameter name="gui_cascade_outclk_index" value="0" />
   <parameter name="gui_channel_spacing" value="0.0" />
   <parameter name="gui_clk_bad" value="false" />
-  <parameter name="gui_device_speed_grade" value="1" />
+  <parameter name="gui_device_speed_grade" value="2" />
   <parameter name="gui_divide_factor_c0" value="1" />
   <parameter name="gui_divide_factor_c1" value="1" />
   <parameter name="gui_divide_factor_c10" value="1" />
@@ -405,7 +489,7 @@
  <module
    name="sdram_controller"
    kind="altera_avalon_new_sdram_controller"
-   version="18.0"
+   version="18.1"
    enabled="1">
   <parameter name="TAC" value="5.4" />
   <parameter name="TMRD" value="3" />
@@ -434,22 +518,40 @@
  <module
    name="sysid_qsys_0"
    kind="altera_avalon_sysid_qsys"
-   version="18.0"
+   version="18.1"
    enabled="1">
   <parameter name="id" value="0" />
  </module>
  <connection
    kind="avalon"
-   version="18.0"
+   version="18.1"
    start="CPU_0_0.cpu_0_outgoing"
-   end="sysid_qsys_0.control_slave">
+   end="custom_counter_0.avalon_slave_0">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x04000018" />
+  <parameter name="baseAddress" value="0x04000000" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
    kind="avalon"
-   version="18.0"
+   version="18.1"
+   start="CPU_0_0.cpu_0_outgoing"
+   end="mailbox_simple_0.avmm_msg_sender">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x04000030" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.1"
+   start="CPU_0_0.cpu_0_outgoing"
+   end="sysid_qsys_0.control_slave">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x04000048" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.1"
    start="CPU_0_0.cpu_0_outgoing"
    end="sdram_controller.s1">
   <parameter name="arbitrationPriority" value="1" />
@@ -458,43 +560,61 @@
  </connection>
  <connection
    kind="avalon"
-   version="18.0"
+   version="18.1"
    start="CPU_0_0.cpu_0_outgoing"
    end="pio_0.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x04000000" />
+  <parameter name="baseAddress" value="0x04000020" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
    kind="avalon"
-   version="18.0"
+   version="18.1"
    start="CPU_0_0.cpu_0_outgoing"
    end="mutex_0.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x04000010" />
+  <parameter name="baseAddress" value="0x04000040" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
    kind="avalon"
-   version="18.0"
+   version="18.1"
    start="CPU_1_0.cpu_1_outgoing"
-   end="sysid_qsys_0.control_slave">
-  <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x04000018" />
-  <parameter name="defaultConnection" value="false" />
- </connection>
- <connection
-   kind="avalon"
-   version="18.0"
-   start="CPU_1_0.cpu_1_outgoing"
-   end="pio_0.s1">
+   end="custom_counter_0.avalon_slave_1">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x04000000" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
    kind="avalon"
-   version="18.0"
+   version="18.1"
+   start="CPU_1_0.cpu_1_outgoing"
+   end="mailbox_simple_0.avmm_msg_receiver">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x04000030" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.1"
+   start="CPU_1_0.cpu_1_outgoing"
+   end="sysid_qsys_0.control_slave">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x04000048" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.1"
+   start="CPU_1_0.cpu_1_outgoing"
+   end="pio_0.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x04000020" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.1"
    start="CPU_1_0.cpu_1_outgoing"
    end="sdram_controller.s1">
   <parameter name="arbitrationPriority" value="1" />
@@ -503,55 +623,75 @@
  </connection>
  <connection
    kind="avalon"
-   version="18.0"
+   version="18.1"
    start="CPU_1_0.cpu_1_outgoing"
    end="mutex_0.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x04000010" />
+  <parameter name="baseAddress" value="0x04000040" />
   <parameter name="defaultConnection" value="false" />
  </connection>
- <connection kind="clock" version="18.0" start="clk_0.clk" end="pll_0.refclk" />
+ <connection kind="clock" version="18.1" start="clk_0.clk" end="pll_0.refclk" />
  <connection
    kind="clock"
-   version="18.0"
+   version="18.1"
    start="pll_0.outclk0"
    end="sysid_qsys_0.clk" />
- <connection kind="clock" version="18.0" start="pll_0.outclk0" end="pio_0.clk" />
- <connection kind="clock" version="18.0" start="pll_0.outclk0" end="CPU_0_0.clk" />
- <connection kind="clock" version="18.0" start="pll_0.outclk0" end="CPU_1_0.clk" />
- <connection kind="clock" version="18.0" start="pll_0.outclk0" end="mutex_0.clk" />
+ <connection kind="clock" version="18.1" start="pll_0.outclk0" end="pio_0.clk" />
+ <connection kind="clock" version="18.1" start="pll_0.outclk0" end="CPU_0_0.clk" />
+ <connection kind="clock" version="18.1" start="pll_0.outclk0" end="CPU_1_0.clk" />
+ <connection kind="clock" version="18.1" start="pll_0.outclk0" end="mutex_0.clk" />
  <connection
    kind="clock"
-   version="18.0"
+   version="18.1"
+   start="pll_0.outclk0"
+   end="mailbox_simple_0.clk" />
+ <connection
+   kind="clock"
+   version="18.1"
+   start="pll_0.outclk0"
+   end="custom_counter_0.clock" />
+ <connection
+   kind="clock"
+   version="18.1"
    start="pll_0.outclk1"
    end="sdram_controller.clk" />
  <connection
    kind="reset"
-   version="18.0"
+   version="18.1"
    start="clk_0.clk_reset"
    end="sdram_controller.reset" />
  <connection
    kind="reset"
-   version="18.0"
+   version="18.1"
    start="clk_0.clk_reset"
    end="sysid_qsys_0.reset" />
- <connection kind="reset" version="18.0" start="clk_0.clk_reset" end="pll_0.reset" />
- <connection kind="reset" version="18.0" start="clk_0.clk_reset" end="pio_0.reset" />
+ <connection kind="reset" version="18.1" start="clk_0.clk_reset" end="pll_0.reset" />
+ <connection kind="reset" version="18.1" start="clk_0.clk_reset" end="pio_0.reset" />
  <connection
    kind="reset"
-   version="18.0"
+   version="18.1"
    start="clk_0.clk_reset"
    end="CPU_0_0.reset" />
  <connection
    kind="reset"
-   version="18.0"
+   version="18.1"
    start="clk_0.clk_reset"
    end="CPU_1_0.reset" />
  <connection
    kind="reset"
-   version="18.0"
+   version="18.1"
    start="clk_0.clk_reset"
    end="mutex_0.reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_0.clk_reset"
+   end="custom_counter_0.reset_sink" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_0.clk_reset"
+   end="mailbox_simple_0.rst_n" />
  <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />
  <interconnectRequirement for="$system" name="qsys_mm.enableEccProtection" value="FALSE" />
  <interconnectRequirement for="$system" name="qsys_mm.insertDefaultSlave" value="FALSE" />

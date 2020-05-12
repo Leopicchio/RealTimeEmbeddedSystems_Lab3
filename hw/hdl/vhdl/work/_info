@@ -1,0 +1,51 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+d/home/vm/SecondLab/hw/modelsim
+Ecounter
+Z0 w1589295023
+Z1 DPx4 ieee 11 numeric_std 0 22 :ASDNFgHXf_ih3J@9F3Ze1
+Z2 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z3 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+Z4 d/home/vm/RealTimeEmbeddedSystems_Lab3/hw/hdl/vhdl
+Z5 8/home/vm/RealTimeEmbeddedSystems_Lab3/hw/hdl/Custom_Counter.vhd
+Z6 F/home/vm/RealTimeEmbeddedSystems_Lab3/hw/hdl/Custom_Counter.vhd
+l0
+L6
+V<NEzbO8A?7H20QEB3C>d82
+!s100 @FL7LL?d<?kbF?>Q;I1h92
+Z7 OV;C;10.5b;63
+32
+Z8 !s110 1589295026
+!i10b 1
+Z9 !s108 1589295026.000000
+Z10 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|/home/vm/RealTimeEmbeddedSystems_Lab3/hw/hdl/Custom_Counter.vhd|
+Z11 !s107 /home/vm/RealTimeEmbeddedSystems_Lab3/hw/hdl/Custom_Counter.vhd|
+!i113 1
+Z12 o-work work -2002 -explicit
+Z13 tExplicit 1 CvgOpt 0
+Acomp
+R1
+R2
+R3
+Z14 DEx4 work 7 counter 0 22 <NEzbO8A?7H20QEB3C>d82
+l45
+L38
+Z15 VYVRibD8@g7;Em[fdSj_Aj0
+Z16 !s100 =o11Xnf9>=nD;GK2i_Kig0
+R7
+32
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 1
+R12
+R13

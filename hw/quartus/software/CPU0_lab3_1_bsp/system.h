@@ -4,7 +4,7 @@
  * Machine generated for CPU 'CPU_0_0_nios2_gen2_0' in SOPC Builder design 'main_system'
  * SOPC Builder design path: ../../main_system.sopcinfo
  *
- * Generated: Sun May 10 16:05:15 CEST 2020
+ * Generated: Tue May 12 17:16:32 CEST 2020
  */
 
 /*
@@ -215,6 +215,7 @@
  */
 
 #define __ALTERA_AVALON_JTAG_UART
+#define __ALTERA_AVALON_MAILBOX_SIMPLE
 #define __ALTERA_AVALON_MUTEX
 #define __ALTERA_AVALON_NEW_SDRAM_CONTROLLER
 #define __ALTERA_AVALON_ONCHIP_MEMORY2
@@ -222,6 +223,7 @@
 #define __ALTERA_AVALON_SYSID_QSYS
 #define __ALTERA_AVALON_TIMER
 #define __ALTERA_NIOS2_GEN2
+#define __CUSTOM_COUNTER
 
 
 /*
@@ -261,6 +263,20 @@
 
 
 /*
+ * custom_counter_0 configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_custom_counter_0 custom_counter
+#define CUSTOM_COUNTER_0_BASE 0x14000000
+#define CUSTOM_COUNTER_0_IRQ -1
+#define CUSTOM_COUNTER_0_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define CUSTOM_COUNTER_0_NAME "/dev/custom_counter_0"
+#define CUSTOM_COUNTER_0_SPAN 32
+#define CUSTOM_COUNTER_0_TYPE "custom_counter"
+
+
+/*
  * hal configuration
  *
  */
@@ -272,12 +288,26 @@
 
 
 /*
+ * mailbox_simple_0 configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_mailbox_simple_0 altera_avalon_mailbox_simple
+#define MAILBOX_SIMPLE_0_BASE 0x14000030
+#define MAILBOX_SIMPLE_0_IRQ -1
+#define MAILBOX_SIMPLE_0_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define MAILBOX_SIMPLE_0_NAME "/dev/mailbox_simple_0"
+#define MAILBOX_SIMPLE_0_SPAN 16
+#define MAILBOX_SIMPLE_0_TYPE "altera_avalon_mailbox_simple"
+
+
+/*
  * mutex_0 configuration
  *
  */
 
 #define ALT_MODULE_CLASS_mutex_0 altera_avalon_mutex
-#define MUTEX_0_BASE 0x14000010
+#define MUTEX_0_BASE 0x14000040
 #define MUTEX_0_IRQ -1
 #define MUTEX_0_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define MUTEX_0_NAME "/dev/mutex_0"
@@ -295,7 +325,7 @@
  */
 
 #define ALT_MODULE_CLASS_pio_0 altera_avalon_pio
-#define PIO_0_BASE 0x14000000
+#define PIO_0_BASE 0x14000020
 #define PIO_0_BIT_CLEARING_EDGE_REGISTER 0
 #define PIO_0_BIT_MODIFYING_OUTPUT_REGISTER 0
 #define PIO_0_CAPTURE 0
@@ -361,13 +391,13 @@
  */
 
 #define ALT_MODULE_CLASS_sysid_qsys_0 altera_avalon_sysid_qsys
-#define SYSID_QSYS_0_BASE 0x14000018
+#define SYSID_QSYS_0_BASE 0x14000048
 #define SYSID_QSYS_0_ID 0
 #define SYSID_QSYS_0_IRQ -1
 #define SYSID_QSYS_0_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define SYSID_QSYS_0_NAME "/dev/sysid_qsys_0"
 #define SYSID_QSYS_0_SPAN 8
-#define SYSID_QSYS_0_TIMESTAMP 1589108720
+#define SYSID_QSYS_0_TIMESTAMP 1589295526
 #define SYSID_QSYS_0_TYPE "altera_avalon_sysid_qsys"
 
 

@@ -2,11 +2,11 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>ucosii</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>May 10, 2020 6:18:59 PM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1589127539054</BspGeneratedUnixTimeStamp>
-        <BspGeneratedLocation>C:\Users\leo\Desktop\Real_Time_Embedded_Systems\Lab3_1\hw\quartus\software\CPU0_lab3_1_bsp</BspGeneratedLocation>
+        <BspGeneratedTimeStamp>May 12, 2020 5:16:31 PM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1589296591096</BspGeneratedUnixTimeStamp>
+        <BspGeneratedLocation>/home/vm/RealTimeEmbeddedSystems_Lab3/hw/quartus/software/CPU0_lab3_1_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
-        <SopcDesignFile>..\..\main_system.sopcinfo</SopcDesignFile>
+        <SopcDesignFile>../../main_system.sopcinfo</SopcDesignFile>
         <JdiFile>default</JdiFile>
         <Cpu>CPU_0_0_nios2_gen2_0</Cpu>
         <SchemaVersion>1.9</SchemaVersion>
@@ -1745,20 +1745,32 @@
                 <attributes>memory</attributes>
         </MemoryMap>
         <MemoryMap>
+                <slaveDescriptor>custom_counter_0</slaveDescriptor>
+                <addressRange>0x14000000 - 0x1400001F</addressRange>
+                <addressSpan>32</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
                 <slaveDescriptor>pio_0</slaveDescriptor>
-                <addressRange>0x14000000 - 0x1400000F</addressRange>
+                <addressRange>0x14000020 - 0x1400002F</addressRange>
+                <addressSpan>16</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>mailbox_simple_0</slaveDescriptor>
+                <addressRange>0x14000030 - 0x1400003F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>mutex_0</slaveDescriptor>
-                <addressRange>0x14000010 - 0x14000017</addressRange>
+                <addressRange>0x14000040 - 0x14000047</addressRange>
                 <addressSpan>8</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>sysid_qsys_0</slaveDescriptor>
-                <addressRange>0x14000018 - 0x1400001F</addressRange>
+                <addressRange>0x14000048 - 0x1400004F</addressRange>
                 <addressSpan>8</addressSpan>
                 <attributes/>
         </MemoryMap>
