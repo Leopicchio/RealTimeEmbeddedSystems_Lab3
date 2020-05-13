@@ -11,7 +11,7 @@
 
 
 /* Definition of Task Stacks */
-#define   TASK_STACKSIZE       512
+#define   TASK_STACKSIZE       10
 OS_STK    task_leds_stack[TASK_STACKSIZE];
 
 #define TASK_LEDS_PRIORITY				2
@@ -38,6 +38,7 @@ OS_STK    task_leds_stack[TASK_STACKSIZE];
 #define ISTOP      3
 #define IIRQEN     4
 #define ICLREOT    5
+#define IMUTEX     7
 #define RESETVAL   0XFF000000
 //Counter starts counting from this value
 #define IRQENVAL   1
@@ -135,43 +136,79 @@ void task_leds(void* pdata)
 
 			printf("Timer reading overhead: %f us\n", (timer_start - timer_end)/TICK_PER_MICROSEC);
 			//send_to_mailbox();
+			//test_counter();
 		}
 	}
 }
 
 
+void get_counter()
+{
+	int n = IORD(SPECIFIC_COUNTER_0_BASE, IMUTEX);
+	int k  = 0;
+	int bit = (n & ( 1 << k )) >> k;
+	printf("iMutex before access trial : %d\n",bit);
+	while (bit != 0)
+	{
+		n = IORD(SPECIFIC_COUNTER_0_BASE, IMUTEX);
+		k  = 0;
+		bit = (n & ( 1 << k )) >> k;
+	}
+	IOWR(SPECIFIC_COUNTER_0_BASE, IMUTEX, 1);
+	n = IORD(SPECIFIC_COUNTER_0_BASE, IMUTEX);
+	k  = 0;
+	bit = (n & ( 1 << k )) >> k;
+	printf("iMutex is finally acquired : %d\n",bit);
+
+}
+
+
+
+void release_counter()
+{
+	IOWR(SPECIFIC_COUNTER_0_BASE, IMUTEX, 0);
+}
+
+
+
+
 int main(void)
 {
-	// setup the parallel port to control the LEDs
-	IOWR_ALTERA_AVALON_PIO_DIRECTION(PIO_0_BASE, 0xFFFFFFFF);	// sets pins as output
+	printf("CPU 0 OK !");
+//	// setup the parallel port to control the LEDs
+//	IOWR_ALTERA_AVALON_PIO_DIRECTION(PIO_0_BASE, 0xFFFFFFFF);	// sets pins as output
+//
+//	// timer setup
+//	IOWR_ALTERA_AVALON_TIMER_CONTROL(CPU_0_0_TIMER_0_BASE, 0b0111);	// start timer, continuous mode on, interrupts active
+//
+//	// register the Isr to respond to a timer overflow
+//	alt_ic_isr_register(CPU_0_0_TIMER_0_IRQ_INTERRUPT_CONTROLLER_ID, CPU_0_0_TIMER_0_IRQ, timer_interrupt, NULL, NULL);
+//
+//	/* get the mutex device handle */
+//	mutex = altera_avalon_mutex_open("/dev/mutex_0");
 
-	// timer setup
-	IOWR_ALTERA_AVALON_TIMER_CONTROL(CPU_0_0_TIMER_0_BASE, 0b0111);	// start timer, continuous mode on, interrupts active
-
-	// register the Isr to respond to a timer overflow
-	alt_ic_isr_register(CPU_0_0_TIMER_0_IRQ_INTERRUPT_CONTROLLER_ID, CPU_0_0_TIMER_0_IRQ, timer_interrupt, NULL, NULL);
-
-	/* get the mutex device handle */
-	mutex = altera_avalon_mutex_open("/dev/mutex_0");
-
-	test_counter();
+	//test_counter();
+	get_counter();//blocking
+	IOWR(SPECIFIC_COUNTER_0_BASE, IRZ, ARBITVAL); //Reset activated to load the counter with the reset value
+	IOWR(SPECIFIC_COUNTER_0_BASE, ISTART, ARBITVAL); //Start the counter
+	release_counter();
 	//while(1){}
 
 	//send_to_mailbox();
 
 	// creates the task which displays the counter value on the LEDs
-	OSTaskCreateExt(task_leds,
-                  NULL,
-                  (void *)&task_leds_stack[TASK_STACKSIZE-1],
-				  TASK_LEDS_PRIORITY,
-				  TASK_LEDS_PRIORITY,
-				  task_leds_stack,
-                  TASK_STACKSIZE,
-                  NULL,
-                  0);
-              
-               
-  OSStart();
+//	OSTaskCreateExt(task_leds,
+//                  NULL,
+//                  (void *)&task_leds_stack[TASK_STACKSIZE-1],
+//				  TASK_LEDS_PRIORITY,
+//				  TASK_LEDS_PRIORITY,
+//				  task_leds_stack,
+//                  TASK_STACKSIZE,
+//                  NULL,
+//                  0);
+//
+//
+//  OSStart();
   return 0;
 }
 

@@ -42,6 +42,7 @@ ARCHITECTURE comp OF Counter IS
 	signal iEOT : std_logic;
 	signal iClrEOT : std_logic;
 	signal iIRQEn : std_logic;
+	signal iMutex : std_logic;
 BEGIN
 	-- Counter process, synchronous Reset by command and count if enabled
 	pCounter:
@@ -77,6 +78,7 @@ BEGIN
 						when "011" => iEn <= '0'; -- Stop Run
 						when "100" => iIRQEn <= WriteData(0);
 						when "101" => iClrEOT <= WriteData(0);
+						when "111" => iMutex <= WriteData(0);
 						when others => null;
 					end case;
 				elsif (ChipSelect2 = '1' and Write2 = '1') then
@@ -87,6 +89,7 @@ BEGIN
 						when "011" => iEn <= '0'; -- Stop Run
 						when "100" => iIRQEn <= WriteData2(0);
 						when "101" => iClrEOT <= WriteData2(0);
+						when "111" => iMutex <= WriteData2(0);
 						when others => null;
 					end case;
 				end if;
@@ -105,6 +108,7 @@ BEGIN
 				if ChipSelect = '1' and Read = '1' then -- Read cycle
 					case Address(2 downto 0) is
 						when "000" => ReadData <= std_logic_vector(iCounter);
+						when "111" => ReadData(0) <= iMutex;
 						-- cast and Read Counter
 						when "100" => ReadData(0) <= iIRQEn;
 						when "101" => ReadData(0) <= iEOT; -- EOT
@@ -114,6 +118,7 @@ BEGIN
 				elsif ChipSelect2 = '1' and Read2 = '1' then
 					case Address2(2 downto 0) is
 						when "000" => ReadData2 <= std_logic_vector(iCounter);
+						when "111" => ReadData2(0) <= iMutex;
 						-- cast and Read Counter
 						when "100" => ReadData2(0) <= iIRQEn;
 						when "101" => ReadData2(0) <= iEOT; -- EOT

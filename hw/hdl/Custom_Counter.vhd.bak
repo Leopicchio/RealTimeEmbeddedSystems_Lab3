@@ -42,6 +42,7 @@ ARCHITECTURE comp OF Counter IS
 	signal iEOT : std_logic;
 	signal iClrEOT : std_logic;
 	signal iIRQEn : std_logic;
+	signal iMutex : std_logic;
 BEGIN
 	-- Counter process, synchronous Reset by command and count if enabled
 	pCounter:
@@ -77,10 +78,20 @@ BEGIN
 						when "011" => iEn <= '0'; -- Stop Run
 						when "100" => iIRQEn <= WriteData(0);
 						when "101" => iClrEOT <= WriteData(0);
+						when "111" => iMutex <= WriteData(0);
 						when others => null;
 					end case;
-				elsif (ChipSelect2 = '1' and Write2 = '1')
-					
+				elsif (ChipSelect2 = '1' and Write2 = '1') then
+					case Address2(2 downto 0) is
+						when "000" => null ;
+						when "001" => iRz <= '1'; -- Reset Counter (pulse)
+						when "010" => iEn <= '1'; -- Start Run
+						when "011" => iEn <= '0'; -- Stop Run
+						when "100" => iIRQEn <= WriteData2(0);
+						when "101" => iClrEOT <= WriteData2(0);
+						when "111" => iMutex <= WriteData2(0);
+						when others => null;
+					end case;
 				end if;
 			end if;
 	end process pRegWr;
@@ -95,16 +106,25 @@ BEGIN
 				ReadData <= (others => '0'); -- default value
 				
 				if ChipSelect = '1' and Read = '1' then -- Read cycle
-				
 					case Address(2 downto 0) is
 						when "000" => ReadData <= std_logic_vector(iCounter);
+						when "111" => ReadData0) <= iMutex;
 						-- cast and Read Counter
 						when "100" => ReadData(0) <= iIRQEn;
 						when "101" => ReadData(0) <= iEOT; -- EOT
 						ReadData(1) <= iEn; -- Run
 						when others => null;
 					end case;
-					
+				elsif ChipSelect2 = '1' and Read2 = '1' then
+					case Address2(2 downto 0) is
+						when "000" => ReadData2 <= std_logic_vector(iCounter);
+						when "111" => ReadData2(0) <= iMutex;
+						-- cast and Read Counter
+						when "100" => ReadData2(0) <= iIRQEn;
+						when "101" => ReadData2(0) <= iEOT; -- EOT
+						ReadData2(1) <= iEn; -- Run
+						when others => null;
+					end case;
 				end if;
 			end if;
 	end process pRegRd;

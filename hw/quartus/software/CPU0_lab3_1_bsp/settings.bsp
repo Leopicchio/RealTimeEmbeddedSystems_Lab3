@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>ucosii</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>May 12, 2020 5:16:31 PM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1589296591096</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>May 13, 2020 5:08:12 PM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1589382492814</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>/home/vm/RealTimeEmbeddedSystems_Lab3/hw/quartus/software/CPU0_lab3_1_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>../../main_system.sopcinfo</SopcDesignFile>

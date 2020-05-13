@@ -142,7 +142,7 @@ refer to the applicable agreement for further details.
 		(text "dqm" (rect 181 283 380 576)(font "Arial" (color 0 0 0)))
 		(text "ras_n" (rect 181 299 392 608)(font "Arial" (color 0 0 0)))
 		(text "we_n" (rect 181 315 386 640)(font "Arial" (color 0 0 0)))
-		(text " main_system " (rect 403 336 884 682)(font "Arial" ))
+		(text " system " (rect 429 336 906 682)(font "Arial" ))
 		(line (pt 176 32)(pt 240 32)(line_width 1))
 		(line (pt 240 32)(pt 240 336)(line_width 1))
 		(line (pt 176 336)(pt 240 336)(line_width 1))
